@@ -172,3 +172,5 @@ logs/
 minio-data/
 
 text.txt
+
+notebooks/mongoDB_demo.ipynb
