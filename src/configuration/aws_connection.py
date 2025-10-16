@@ -1,6 +1,7 @@
 import boto3
 import os
 from src.constants import *
+from src.configuration.environment import EnvironmentConfig
 
 def get_minio_client():
     """
@@ -8,12 +9,16 @@ def get_minio_client():
     MinIO is used as an alternative to AWS S3 for local model storage
     """
     try:
+        # Get MinIO configuration from environment
+        minio_endpoint = EnvironmentConfig.get_minio_endpoint()
+        minio_user, minio_password = EnvironmentConfig.get_minio_credentials()
+        
         # Create a boto3 client configured for MinIO
         minio_client = boto3.client(
             's3',
-            endpoint_url=MINIO_ENDPOINT,
-            aws_access_key_id=MINIO_ROOT_USER,
-            aws_secret_access_key=MINIO_ROOT_PASSWORD,
+            endpoint_url=minio_endpoint,
+            aws_access_key_id=minio_user,
+            aws_secret_access_key=minio_password,
             region_name=MINIO_REGION_NAME,
             verify=False  # Set to True in production with proper certificates
         )

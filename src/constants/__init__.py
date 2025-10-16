@@ -6,6 +6,10 @@ DATABASE_NAME = "Proj1"
 COLLECTION_NAME = "Proj1-Data"
 MONGODB_URL_KEY = "MONGODB_URL"
 
+# Get environment variables with defaults
+import os
+MONGODB_URL = os.getenv("MONGODB_URL", "mongodb://localhost:27017/Proj1")
+
 PIPELINE_NAME: str = ""
 ARTIFACT_DIR: str = "artifact"
 
@@ -22,9 +26,9 @@ SCHEMA_FILE_PATH = os.path.join("config", "schema.yaml")
 
 
 # MinIO Configuration (replacing AWS S3)
-MINIO_ENDPOINT = "http://localhost:9000"
-MINIO_ROOT_USER = "minioadmin"
-MINIO_ROOT_PASSWORD = "minioadmin"
+MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT", "http://localhost:9000")
+MINIO_ROOT_USER = os.getenv("MINIO_ROOT_USER", "minioadmin")
+MINIO_ROOT_PASSWORD = os.getenv("MINIO_ROOT_PASSWORD", "minioadmin")
 MINIO_REGION_NAME = "us-east-1"
 
 
@@ -73,5 +77,5 @@ MODEL_BUCKET_NAME = "my-model-mlopsproj"
 MODEL_PUSHER_S3_KEY = "model-registry"
 
 
-APP_HOST = "127.0.0.1"
-APP_PORT = 5000
+APP_HOST = os.getenv("APP_HOST", "0.0.0.0")
+APP_PORT = int(os.getenv("APP_PORT", "5000"))

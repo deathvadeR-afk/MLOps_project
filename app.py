@@ -7,6 +7,7 @@ from starlette.responses import HTMLResponse, RedirectResponse
 from uvicorn import run as app_run
 
 from typing import Optional
+from datetime import datetime
 
 # Importing constants and pipeline modules from the project
 from src.constants import APP_HOST, APP_PORT
@@ -140,6 +141,17 @@ async def predictRouteClient(request: Request):
     except Exception as e:
         return {"status": False, "error": f"{e}"}
 
+# Health check endpoint
+@app.get("/health")
+async def health_check():
+    """
+    Health check endpoint for monitoring
+    """
+    return {"status": "healthy", "timestamp": datetime.now().isoformat()}
+
 # Main entry point to start the FastAPI server
 if __name__ == "__main__":
-    app_run(app, host=APP_HOST, port=APP_PORT)
+    from src.configuration.environment import EnvironmentConfig
+    host = EnvironmentConfig.get_app_host()
+    port = EnvironmentConfig.get_app_port()
+    app_run(app, host=host, port=port)

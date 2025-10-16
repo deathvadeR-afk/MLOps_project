@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-insurance-mlops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vehicle-insurance-mlops
+  template:
+    metadata:
+      labels:
+        app: vehicle-insurance-mlops
+    spec:
+      containers:
+      - name: app
+        image: your-dockerhub-username/vehicle-insurance-mlops:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MONGODB_URL
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: url
+        - name: MINIO_ENDPOINT
+          value: "http://minio:9000"
+        - name: MINIO_ROOT_USER
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: root-user
+        - name: MINIO_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: minio-secret
+              key: root-password
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 20
