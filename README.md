@@ -204,28 +204,6 @@ make docker-run
 2. Update configurations in `src/entity/config_entity.py`
 3. Integrate new components in `src/pipeline/training_pipeline.py`
 
-## CI/CD Pipeline
-
-This project includes a complete CI/CD pipeline using GitHub Actions:
-
-- **Continuous Integration**: Runs tests and linting on every push
-- **Continuous Deployment**: Automatically deploys to cloud platforms
-- **ML Pipeline Automation**: Scheduled model training and evaluation
-
-To enable the CI/CD pipeline:
-
-1. Fork this repository to your GitHub account
-2. Set up the required secrets in your repository settings:
-   - `DOCKER_USERNAME` - Your Docker Hub username
-   - `DOCKER_PASSWORD` - Your Docker Hub password
-   - `RENDER_SERVICE_ID` - Your Render service ID (if using Render)
-   - `RENDER_API_KEY` - Your Render API key (if using Render)
-   - `MONGODB_URL` - Your MongoDB connection string
-   - `MINIO_ENDPOINT` - Your MinIO endpoint
-   - `MINIO_ROOT_USER` - Your MinIO username
-   - `MINIO_ROOT_PASSWORD` - Your MinIO password
-
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
-
-## License
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+https://vehicle-insurance-prediction-8lkg.onrender.com
