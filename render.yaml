@@ -7,4 +7,12 @@ services:
     startCommand: "python app.py"
     envVars:
       - key: PYTHON_VERSION
-        value: 3.10.6
+        value: 3.10
+      - key: MONGODB_URL
+        sync: false
+      - key: MINIO_ENDPOINT
+        sync: false
+      - key: MINIO_ROOT_USER
+        sync: false
+      - key: MINIO_ROOT_PASSWORD
+        sync: false
